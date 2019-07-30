@@ -1,22 +1,23 @@
 package pl.beder;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class StaticTableTest {
+public class SimpleLinkedListTest {
 
-    private final StaticTable staticTable = new StaticTable();
+    private final SimpleLinkedList linekedList = new SimpleLinkedList();
 
     @Test
     public void shouldInsertValuesCorrectly() {
         //when
-        staticTable.insertAt(0, 1);
-        staticTable.insertAt(0, 2);
-        staticTable.insertAt(0, 3);
+        linekedList.insertAt(0, 1);
+        linekedList.insertAt(0, 2);
+        linekedList.insertAt(0, 3);
 
         //then
-        assertThat(staticTable.getHolderView()).containsExactly(3, 2, 1);
+        Assertions.assertThat(linekedList.getHolderView()).containsExactly(3, 2, 1);
 
     }
 
@@ -26,7 +27,7 @@ public class StaticTableTest {
         initializeHolderWith_3_4_5_2_1();
 
         //then
-        assertThat(staticTable.getHolderView()).containsExactly(3, 4, 5, 2, 1);
+        Assertions.assertThat(linekedList.getHolderView()).containsExactly(3, 4, 5, 2, 1);
 
     }
 
@@ -36,10 +37,10 @@ public class StaticTableTest {
         initializeHolderWith_3_4_5_2_1();
 
         //when
-        staticTable.insertAt(5, 6);
+        linekedList.insertAt(5, 6);
 
         //then
-        assertThat(staticTable.getHolderView()).containsExactly(3, 4, 5, 2, 1, 6);
+        Assertions.assertThat(linekedList.getHolderView()).containsExactly(3, 4, 5, 2, 1, 6);
 
     }
 
@@ -49,7 +50,7 @@ public class StaticTableTest {
         initializeHolderWith_3_4_5_2_1();
 
         //when
-        long index_with_value_7 = staticTable.firstIndexWith(7L);
+        long index_with_value_7 = linekedList.firstIndexWith(7L);
 
         //then
         assertThat(index_with_value_7).isEqualTo(-1);
@@ -61,7 +62,7 @@ public class StaticTableTest {
         initializeHolderWith_3_4_5_2_1();
 
         //when
-        long index_with_value_7 = staticTable.firstIndexWith(5L);
+        long index_with_value_7 = linekedList.firstIndexWith(5L);
 
         //then
         assertThat(index_with_value_7).isEqualTo(2);
@@ -71,11 +72,11 @@ public class StaticTableTest {
     public void shouldReturnFirstIndexWhenValueIsRepeated() {
         //given
         initializeHolderWith_3_4_5_2_1();
-        staticTable.insertAt(2, 5);
-        staticTable.insertAt(5, 5);
+        linekedList.insertAt(2, 5);
+        linekedList.insertAt(5, 5);
 
         //when
-        long index_with_value_7 = staticTable.firstIndexWith(5L);
+        long index_with_value_7 = linekedList.firstIndexWith(5L);
 
         //then
         assertThat(index_with_value_7).isEqualTo(2);
@@ -87,7 +88,7 @@ public class StaticTableTest {
         initializeHolderWith_3_4_5_2_1();
 
         //when
-        long index = staticTable.firstIndexWithGivenOrHigherValue(6);
+        long index = linekedList.firstIndexWithGivenOrHigherValue(6);
 
         //then
         assertThat(index).isEqualTo(-1L);
@@ -97,10 +98,10 @@ public class StaticTableTest {
     public void shouldReturnIndexThatHasHigherValue() {
         //given
         initializeHolderWith_3_4_5_2_1();
-        staticTable.insertAt(5, 10L);
+        linekedList.insert(10L);
 
         //when
-        long index = staticTable.firstIndexWithGivenOrHigherValue(6);
+        long index = linekedList.firstIndexWithGivenOrHigherValue(6);
 
         //then
         assertThat(index).isEqualTo(5L);
@@ -109,22 +110,24 @@ public class StaticTableTest {
     @Test
     public void shouldBeSortedWhenUsingOnlyInsertSortedMethod() {
         //when
-        staticTable.insertSorted(5);
-        staticTable.insertSorted(8);
-        staticTable.insertSorted(12);
-        staticTable.insertSorted(345);
-        staticTable.insertSorted(1);
-        staticTable.insertSorted(-65);
+        linekedList.insertSorted(5);
+        linekedList.insertSorted(8);
+        linekedList.insertSorted(12);
+        linekedList.insertSorted(345);
+        linekedList.insertSorted(1);
+        linekedList.insertSorted(-65);
 
         //then
-        assertThat(staticTable.getHolderView()).containsExactly(-65L, 1L, 5L, 8L, 12L, 345L);
+        Assertions.assertThat(linekedList.getHolderView()).containsExactly(-65L, 1L, 5L, 8L, 12L, 345L);
     }
 
     private void initializeHolderWith_3_4_5_2_1() {
-        staticTable.insertAt(0, 1);
-        staticTable.insertAt(0, 2);
-        staticTable.insertAt(0, 3);
-        staticTable.insertAt(1, 4);
-        staticTable.insertAt(2, 5);
+        linekedList.insertAt(0, 1);
+        linekedList.insertAt(0, 2);
+        linekedList.insertAt(0, 3);
+        linekedList.insertAt(1, 4);
+        linekedList.insertAt(2, 5);
     }
+
+
 }

@@ -15,6 +15,7 @@ public class App {
         System.out.println(seconds + "ms");
 
         timePrintingWrapper(() -> somePieceOfCode(0));
+
     }
 
     private static void somePieceOfCode(long total) {

@@ -15,4 +15,6 @@ public interface Table {
     void insertSorted(long value);
 
     long[] getHolderView();
+
+    void insert(long value);
 }
